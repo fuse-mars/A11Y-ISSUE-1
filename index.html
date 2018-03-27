@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+
+<h3>[A11y ISSUE #1] Text Input Selection</h3>
+<p>Safari 11.0.3 (13604.5.6)</p>
+<p>When text selection is done using Javascript `select` or `setSelectionRange`, VoiceOver Selects the first word in the selection</p>
+
+<div class="container">
+  <div>
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <button type="button" id="enterBtn" >Enter Focus</button>
+    <button type="button" id="clickBtn" >Click Focus</button>
+  </div>
+</div>
+<script>
+  document.querySelector('#enterBtn').addEventListener('keydown', function(e) {
+    console.log('[]', e);
+    // setTimeout(function()  {
+      if (e.keyCode !== 9 && e.keyCode !== 16) {
+        document.querySelector('#fname').value = 'START '+Math.random() + ' ';
+        document.querySelector('#fname').focus();
+      const length = document.querySelector('#fname').value.length;        
+      document.querySelector('#fname').setSelectionRange(0, length);
+        
+      }
+    // }, 5000)
+  });
+  document.querySelector('#clickBtn').addEventListener('click', function() {
+    // setTimeout(function()  {
+      document.querySelector('#fname').value = 'START '+Math.random() + ' ';      
+      document.querySelector('#fname').focus();
+      const length = document.querySelector('#fname').value.length;
+      document.querySelector('#fname').setSelectionRange(0, length);
+      
+    // }, 5000)
+  });
+</script>
+</body>
+</html>
