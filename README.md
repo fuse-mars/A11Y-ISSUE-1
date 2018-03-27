@@ -13,3 +13,4 @@ When text selection is done using Javascript `select` or `setSelectionRange`, Vo
 * Turn Voice Over on
 * Tab to go to the *First Name* input field.
 * Tab to go to the *Enter Focus* button. 
+* Press *Enter* key
